@@ -5,7 +5,7 @@ that actually succeeded the first time — leading to duplicate orders,
 duplicate charges, or duplicate anything. This project makes one endpoint
 safe to call more than once with the same intent.
 
-**Live demo:** _add your deployed URL here_
+**Live demo:** https://retry-safe-endpoint.onrender.com/
 
 ## How it works
 
@@ -26,10 +26,7 @@ lock would only be necessary across multiple independent databases.
 ## Proof (run it yourself)
 
 ```
-node fixed-server.js
-node loadtest.js 500
-# then check:
-psql -d ordersdb -c "SELECT COUNT(*) FROM orders WHERE idempotency_key = '<key from output>';"
+## Proof (run it yourself) Tested locally with 500 concurrent requests against a real PostgreSQL 16 database, and again on the live deployment with real HTTP requests: - **Naive version** (check-then-insert): crashes under concurrency with `duplicate key value violates unique constraint` errors — see `naive-error-sample.txt` and `RESULTS.md` for the full writeup. - **Fixed version** (insert-first, catch-conflict): 300 concurrent requests with one shared key → exactly 1 row created, 0 errors, 0 duplicates. - **Live deployment verified**: same request sent twice to https://retry-safe-endpoint.onrender.com/orders → 1 row created on the first call, a clean "replay" response on the second, confirmed directly in the production database. Full methodology and raw output in `RESULTS.md`. 
 ```
 
 Result: 500 concurrent calls with one key → 1 row created, 499 replays
