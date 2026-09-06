@@ -5,7 +5,9 @@ that actually succeeded the first time — leading to duplicate orders,
 duplicate charges, or duplicate anything. This project makes one endpoint
 safe to call more than once with the same intent.
 
-**Live demo:** https://retry-safe-endpoint.onrender.com/
+**Backend:** https://retry-safe-endpoint.onrender.com/
+
+**Frontend demo:** https://bhagavathiii5.github.io/retry-safe-endpoint/
 
 ## How it works
 
