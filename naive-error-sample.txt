@@ -1,0 +1,4 @@
+error: duplicate key value violates unique constraint "orders_idempotency_key_key"
+error: duplicate key value violates unique constraint "orders_idempotency_key_key"
+error: duplicate key value violates unique constraint "orders_idempotency_key_key"
+...(truncated, ~290 more identical errors during the 300-request test)
